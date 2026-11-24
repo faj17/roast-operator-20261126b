@@ -44,12 +44,28 @@ def validate(line: str) -> str:
     return line
 
 
+def roast_report_card(line: str) -> str:
+    """Spin a pocket-sized scorecard off the finished roast, purely for a grin.
+
+    This never touches the entry file and never feeds the bounty judge;
+    it just hands the operator a cheerful tally — how long the line is,
+    how many words it packs in, and a wink that it still fits on one
+    single line — so he can admire the damage before moving on.
+    """
+    words = line.split()
+    return (
+        f"Report card: {len(line)} characters, {len(words)} words, "
+        "all on one single line — short, sharp, and operator-approved."
+    )
+
+
 def main() -> None:
     text = validate(ROAST)
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     OUTPUT_FILE.write_text(text, encoding="utf-8")
     print(text)
     print(f"Wrote {len(text)} chars to {OUTPUT_FILE}")
+    print(roast_report_card(text))
 
 
 if __name__ == "__main__":
